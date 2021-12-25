@@ -1,8 +1,8 @@
 import express from "express";
-import { getHistoricalData } from "../controller/post_controller";
+import { getHistoricalData } from "../controller/post_controller.js";
 
-const postRoutes = express();
+const postRoutes = express.Router();
 
-postRoutes.post("/post/getHistoricalData", getHistoricalData);
+postRoutes.post("/getHistoricalData", getHistoricalData);
 
 export default postRoutes;

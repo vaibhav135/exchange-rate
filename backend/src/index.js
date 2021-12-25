@@ -3,8 +3,8 @@ import * as dotenv from "dotenv";
 import axios from "axios";
 import cors from "cors";
 
-import postRoutes from "./routes/post";
-import getRoutes from "./routes/get";
+import postRoutes from "./routes/post.js";
+import getRoutes from "./routes/get.js";
 
 dotenv.config();
 

@@ -1,0 +1,43 @@
+.navigation_div{
+	height:100%;
+	width: 100%;
+}
+
+.navigation_nav{
+	background-color: #264653;
+	height: 60px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+#navigation_li, .navigation_ul{
+	height: 100%;
+}
+
+.navigation_ul{
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	margin: 0;
+	justify-content: flex-end;
+}
+
+
+.currently_active{
+	background-color: #2A9D8F;
+}
+
+#li_link{
+	display: flex;
+	flex-direction: row;
+  	justify-content: center;
+  	align-items: center;
+	text-align: center;
+	width: 100%;
+	margin-right: 60px;
+	text-decoration: none;
+	font-size: 18px;
+	color: white;
+	height: 100%;
+}

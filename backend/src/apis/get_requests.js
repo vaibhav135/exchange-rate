@@ -9,6 +9,8 @@ const app_id = process.env.APP_ID_FOR_API || "";
 const base_url = process.env.BASE_URL_API || "";
 
 export const fetchLatestData = async () => {
+  console.log("app_id: " + app_id);
+  console.log("base_url: " + base_url);
   const response = await axios.get(
     `${base_url}/api/latest.json?app_id=${app_id}`
   );

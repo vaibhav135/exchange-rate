@@ -1,0 +1,21 @@
+.barChartWrapperDiv{
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	margin-bottom: 2rem;
+	padding: 0 50px;
+	overflow: visible;
+}
+
+
+.svg_bar{
+	background: #eee;
+	overflow: visible;
+	display: block;
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+}

@@ -1,0 +1,43 @@
+###  backend ###
+### Node ###
+backend/# Logs
+backend/logs
+backend/*.log
+backend/npm-debug.log*
+backend/yarn-debug.log*
+backend/yarn-error.log*
+backend/lerna-debug.log*
+backend/.pnpm-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+backend/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+backend/build/Release
+
+# Dependency directories
+backend/node_modules/
+backend/jspm_packages/
+
+# Optional npm cache directory
+backend/.npm
+
+# Optional eslint cache
+backend/.eslintcache
+
+# ignoring env backend
+backend/.env
+
+###  frontend ###
+### react ###
+frontend/.DS_*
+frontend/*.log
+frontend/logs
+frontend/**/*.backup.*
+frontend/**/*.back.*
+
+frontend/node_modules
+
+# ignoring env frontend
+frontend/.env

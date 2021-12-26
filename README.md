@@ -11,7 +11,7 @@ Check the latest or historical exhange-rate data against US dollars and see the 
 ### About
 The project is created to check the latest and historical exchange-rate with US dollar as the base currency. The project uses openexchangerates api free tier. For the frontend part the project is created with react.js, typescirpt, react-chart2js, axios and for the backend part the project uses Express.js, javascipt, axios.
 
-> To know more api openexchangerates visit [here](https://openexchangerates.org/)
+> To know more about openexchangerates api visit [here](https://openexchangerates.org/)
 
 ### Installing project in local machine
  - First, clone the git repo from [here](https://github.com/vaibhav135/exchange-rate)

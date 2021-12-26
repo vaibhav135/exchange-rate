@@ -16,7 +16,6 @@ const Navigation = () => {
 
   return (
     <div className="navigation_div">
-      {" "}
       <nav className="navigation_nav">
         {""}
         <ul className="navigation_ul">

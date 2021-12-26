@@ -1,8 +1,87 @@
-import * as d3 from "d3";
 import { useEffect, useRef } from "react";
-import UseResizeObserverApiHook from "hooks/useResizeObserverApiHook";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 import "./bar_chart.css";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const options = {
+  scales: {
+    y: {
+      title: {
+        display: true,
+        text: "Currencies",
+        color: "#635F5D",
+        font: {
+          lineHeight: 1.8,
+          size: 18,
+        },
+      },
+    },
+    x: {
+      title: {
+        display: true,
+        text: "Rates",
+        color: "#635F5D",
+        font: {
+          lineHeight: 1.8,
+          size: 18,
+        },
+      },
+      min: 0,
+      max: 42000,
+      ticks: {
+        // forces step size to be 50 units
+        stepSize: 500,
+        color: "#635F5D",
+      },
+    },
+  },
+  indexAxis: "y" as const,
+  elements: {
+    bar: {
+      borderWidth: 2,
+    },
+  },
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "right" as const,
+      labels: {
+        color: "#635F5D",
+        font: {
+          lineHeight: 1.8,
+          size: 16,
+        },
+      },
+    },
+    title: {
+      display: true,
+      text: "exchange rates in bar chart",
+      color: "#635F5D",
+      font: {
+        lineHeight: 1.8,
+        size: 18,
+      },
+    },
+  },
+};
 
 const BarChart = ({
   currency_names,
@@ -11,111 +90,34 @@ const BarChart = ({
   currency_names: string[];
   currency_rates: number[];
 }) => {
-  const svgRef = useRef(null);
-  const divWrapperRef = useRef(null);
-  const dimensions = UseResizeObserverApiHook(divWrapperRef);
-
-  useEffect(() => {
-    const svg = d3.select(svgRef.current);
-
-    if (!dimensions) return;
-
-    let { bottom, height, left, right, top, width } = dimensions;
-
-    console.log(
-      "bottom: " +
-        bottom +
-        "\nheight: " +
-        height +
-        "\nleft: " +
-        left +
-        "\nright: " +
-        right +
-        "\ntop: " +
-        top +
-        "\nwidth: " +
-        width
-    );
-
-    //new height accoring to the elements in the array
-    height = Math.ceil((currency_names.length + 0.1) * 25) - top - bottom;
-    width = width - left - right;
-
-    console.log("height: " + height + "  " + "width: " + width);
-    //height = height ;
-
-    //svg
-    //.attr("preserveAspectRatio", "xMinYMin meet")
-    //.attr("viewBox", [0, 0, width, height])
-    //.classed("svg-content-responsive", true)
-    //.attr("width", width)
-    //.attr("height", height)
-    //.style("border", "1px solid black");
-
-    svg
-      .attr("viewBox", [0, 0, width, height])
-      .style("border", "1px solid black");
-
-    const maxElement = d3.max(currency_rates);
-    const yPadding = 0.1;
-
-    const xScale = d3
-      .scaleLinear()
-      .domain([0, Number(maxElement)])
-      .range([left, width - right]);
-
-    const yDomain = new d3.InternSet(currency_names);
-
-    const yScale: any = d3
-      .scaleBand()
-      .padding(yPadding)
-      .domain(yDomain)
-      .range([top, height - bottom]);
-
-    const xAxis: any = d3.axisTop(xScale).ticks(width / 80);
-    const yAxis: any = d3.axisLeft(yScale).tickSizeOuter(20);
-
-    const I = d3
-      .range(currency_rates.length)
-      .filter((i) => yDomain.has(currency_names[i]));
-
-    // g.select(".domain").remove() => removes the domin x-axis line
-    svg
-      .select(".x-axis")
-      .attr("transform", `translate(0,${top})`)
-      .call(xAxis)
-      .call((g) => g.select(".domain").remove())
-      .call((g) =>
-        g
-          .selectAll(".tick line")
-          .clone()
-          .attr("y2", height - top - bottom)
-          .attr("stroke-opacity", 0.1)
-      );
-
-    svg.select(".y-axis").call(yAxis).attr("transform", `translate(${left},0)`);
-
-    svg
-      .selectAll(".bar")
-      .data(currency_names, (data, key) => key)
-      .join("rect")
-      .attr("class", "bar")
-      .attr("fill", "teal")
-      .attr("x", xScale(0))
-      .attr("y", (data, index) => yScale(currency_names[index]))
-      .attr("width", (data, index) => xScale(currency_rates[index]) - xScale(0))
-      .attr("height", yScale.bandwidth());
-  }, [currency_names, currency_rates, dimensions]);
+  const data = {
+    labels: currency_names,
+    datasets: [
+      {
+        label: "rates",
+        data: currency_rates,
+        borderColor: [
+          "rgb(85, 255, 0)",
+          "rgb(255, 153, 0)",
+          "rgb(255, 242, 0)",
+          "rgb(255, 98, 0)",
+          "rgb(255, 60, 0)",
+        ],
+        backgroundColor: [
+          "rgba(85, 255, 0, 0.2)",
+          "rgba(255, 153, 0, 0.2)",
+          "rgba(255, 242, 0, 0.2)",
+          "rgba(255, 98, 0, 0.2)",
+          "rgba(255, 60, 0, 0.2)",
+        ],
+      },
+    ],
+  };
 
   return (
-    <>
-      <div ref={divWrapperRef} className="barChartWrapperDiv">
-        <svg ref={svgRef} className=".svg_bar">
-          <g className="x-axis" />
-          <g className="y-axis" />
-        </svg>
-      </div>
-    </>
+    <div className="barChartWrapperDiv">
+      <Bar options={options} data={data} height={400} />{" "}
+    </div>
   );
 };
 

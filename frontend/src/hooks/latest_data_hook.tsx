@@ -9,6 +9,7 @@ const LatestDataHook = () => {
       await getLatestData().then((res) => {
         const res_data = res.data;
         if (res_data.status === "ok") {
+          console.log(res_data);
           setLatestDataHook(res_data.data);
         } else {
           console.log(res_data.error);
@@ -16,6 +17,7 @@ const LatestDataHook = () => {
       });
     };
     callApi();
+    return () => {};
   }, []);
 
   return { latestDataHook };

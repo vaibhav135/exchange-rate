@@ -1,0 +1,47 @@
+.about_outer_div{
+	height:100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.about_inner_div{
+	border: 2px solid black;
+	height: 70%;
+	width: 55%;
+	padding: 40px;
+	font-size: 18px;
+	font-family:  'Poppins', sans-serif;
+	flex-wrap: wrap;
+}
+
+.about_footer_div , .tech_stack_div{
+	margin-top: 100px;
+	text-align: center;
+}
+
+#svg_icon, #tech_stack_icons{
+	width: 5%;
+	margin: 0 15px;
+}
+
+#svg_icon:hover{
+	cursor: pointer;
+}
+
+.stackoverflow_icon{
+	color: #F48024;
+}
+
+.github_icon{
+	color:#0d1117;
+}
+
+.linkedin_icon{
+	color: #006097;
+}
+
+a {
+	text-decoration: none;
+}
